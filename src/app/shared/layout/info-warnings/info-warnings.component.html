@@ -1,0 +1,6 @@
+<button type="button" class="btn btn-link" (click)="openDialog(warnings)" *ngIf="!showDelete">
+  <span class="badge badge-danger badge-pill">{{ warnings.length }}</span>
+</button>
+<button mat-icon-button color="primary" focusable="false" (click)="openDialog(warnings)" *ngIf="showDelete">
+  <i class="material-icons"> warning </i>
+</button>

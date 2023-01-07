@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="text-danger">{{ 'sefac.attention' | translate }}</h4>
+</div>
+<div class="modal-body">
+  <div class="container-fluid" *ngIf="data.warnings">
+    <h5 class="message">{{ data.message }}</h5>
+    <ul>
+      <li *ngFor="let warning of data.warnings"> {{ warning }} </li>
+    </ul>
+  </div>
+</div>
+<div class="modal-footer">
+  <button mat-raised-button color="warn" data-dismiss="modal" (click)="onCloseCancel()">
+    <i class="material-icons"> close </i> Não
+  </button>
+  <button mat-raised-button color="primary" data-dismiss="modal" (click)="onCloseConfirm()">
+    <i class="material-icons"> done_all </i> Sim
+  </button>
+</div>

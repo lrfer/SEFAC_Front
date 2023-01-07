@@ -1,0 +1,60 @@
+<div class="container-fluid telaLogin">
+  <div class="row">
+    <div class="col">
+      <img id="logo" [src]="logo" class="img-fluid" alt="{{ 'sefac.logo_alt' | translate }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="box-shadow">
+      <div *ngIf="showMessageError" class="alert alert-danger fade show" role="alert">
+        <i class="material-icons">error</i>{{ 'login.user_or_password_invalid' | translate }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeInvalidUserMessage()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+                <input type="text" matInput #UserName formControlName="username" maxlength="50" placeholder="{{ 'login.label.user' | translate }}" required>
+                <mat-icon matSuffix> account_circle </mat-icon>
+                <mat-error *ngIf="f['username'].touched && f['username'].errors">
+                  <span *ngIf="f['username'].errors['required']">{{ 'login.user_required' | translate }}</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+                <input type="password" matInput #Password formControlName="password" maxlength="50" placeholder="{{ 'login.label.password' | translate }}" required>
+                <mat-icon matSuffix> lock </mat-icon>
+                <mat-error *ngIf="f['password'].touched && f['password'].errors">
+                  <span *ngIf="f['password'].errors['required']">{{ 'login.password_required' | translate }}</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <button [disabled]="!loginForm.valid" mat-flat-button color="primary" class="btn btn-large btn-submit" type="submit">
+                <i class="material-icons"> lock </i>{{ 'login.login' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <button mat-button color="primary"> {{ 'login.forgot_password' | translate }}</button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

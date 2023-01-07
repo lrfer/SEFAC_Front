@@ -1,0 +1,148 @@
+{
+  "sefac": {
+    "title": "SEFAC Web",
+    "name": "Sistema de Extensão Facom.",
+    "logo_alt": "Logo UFU",
+    "filter": "Digite aqui sua pesquisa...",
+    "welcome": "Bem vindo(a), {{name}}!",
+    "attention": "Atenção:",
+    "total": "Total"
+  },
+  "navbar": {
+    "home": "Início",
+    "admin": "Administrador",
+    "appraiser": "Execução atividade",
+    "personal": "Pessoal",
+    "report": "Relatório",
+    "activity_type_table": "Tabela de pontuação",
+    "activity_type": "Tipo de Atividade",
+    "activity_type_version": "Versões da tabela de pontuação",
+    "activity": "Atividade",
+    "logout": "Sair",
+    "reports": "Relatórios",
+    "aluno": "Gerenciamento de alunos"
+  },
+  "aluno": {
+    "title": {
+      "title": "Lista de aluno",
+      "new": "Novo aluno",
+      "edit": "Editar aluno",
+      "delete": "Excluir aluno",
+      "error": "Erro",
+      "list": "alunos",
+      "success": "Sucesso",
+      "current_level": "Nível atual",
+      "login": "Login",
+      "general_information": "Informações gerais do aluno"
+    },
+    "label": {
+      "name": "Nome",
+      "registration": "Número matrícula",
+      "code": "Código curso",
+      "message": {
+        "name": "Nome do professor",
+        "registration": "Número matrícula",
+        "code": "Código curso"
+      }
+    },
+    "validate": {
+      "name": {
+        "required": "Nome é obrigatório",
+        "maxlength": "Nome deve ter no máximo 255 caracteres"
+      },
+      "code": {
+        "required": "Código do curso é obrigatório",
+        "maxlength": "Nome deve ter no máximo 255 caracteres"
+      },
+      "registration": {
+        "required": "Número de matrícula é obrigatório",
+        "maxlength": "Nome deve ter no máximo 255 caracteres"
+      }
+    }
+  },
+
+  "button": {
+    "close": "Fechar",
+    "save": "Salvar",
+    "update": "Editar",
+    "back": "Voltar",
+    "action": "Ações",
+    "delete": "Excluir",
+    "view_pdf": "Visualizar PDF",
+    "update_document": "Atualizar Comprovante",
+    "copy_version": "Copiar versão anterior",
+    "copy_version_selected": "Copiar",
+    "no": "Não",
+    "yes": "Sim",
+    "filter": "Filtrar",
+    "evaluate": "Avaliar",
+    "close_report": "Encerrar relatório",
+    "close_evaluation": "Encerrar avaliação"
+  },
+  "routes": {
+    "login": "/login",
+    "home": "/home",
+    "report": {
+      "list": "/relatorio",
+      "new": "/relatorio/new",
+      "edit": "/relatorio/edit/{{id}}",
+      "info": "/relatorio/info/{{id}}"
+    },
+    "activity_type_table": {
+      "list": "/tabelaPontuacao",
+      "new": "/tabelaPontuacao/new",
+      "edit": "/tabelaPontuacao/edit/{{id}}"
+    },
+    "activity_type": {
+      "list": "/tipoAtividadeVersao/{{tipoAtividadeVersaoId}}/tipoAtividade",
+      "new": "/tipoAtividadeVersao/{{tipoAtividadeVersaoId}}/tipoAtividade/new",
+      "edit": "/tipoAtividadeVersao/{{tipoAtividadeVersaoId}}/tipoAtividade/edit/{{id}}"
+    },
+    "activity": {
+      "list": "/relatorio/{{relatorioId}}/atividade",
+      "new": "/relatorio/{{relatorioId}}/atividade//new",
+      "edit": "/relatorio/{{relatorioId}}/atividade/edit/{{id}}"
+    },
+    "activity_type_version": {
+      "list": "/tipoAtividadeVersao",
+      "new": "/tipoAtividadeVersao/new",
+      "edit": "/tipoAtividadeVersao/edit/{{id}}"
+    },
+    "evaluation": {
+      "index": "/avaliacao",
+      "activity": {
+        "list": "/avaliacao/{{relatorioId}}/atividade",
+        "edit": "/avaliacao/{{relatorioId}}/atividade/edit/{{id}}"
+      }
+    },
+    "aluno": {
+      "list": "/aluno",
+      "new": "/aluno/new",
+      "edit": "/aluno/edit/{{id}}"
+    }
+  },
+  "table": {
+    "ITEMS_PER_PAGE_LABEL": "Itens por página:",
+    "NEXT_PAGE_LABEL": "Próxima página",
+    "PREVIOUS_PAGE_LABEL": "Página anterior",
+    "FIRST_PAGE_LABEL": "Primeira página",
+    "LAST_PAGE_LABEL": "Última página",
+    "RANGE_PAGE_LABEL_1": "0 de {{length}}",
+    "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} de {{length}}"
+  },
+  "warning": {
+    "title": "Aviso",
+    "date_invalid": "Data inválida"
+  },
+  "login": {
+    "login": "Realizar Login",
+    "forgot_password": "Esqueci minha senha",
+    "user_required": "Usuário é obrigatório.",
+    "password_required": "Senha é obrigatório.",
+    "user_or_password_invalid": "Usuário ou senha inválidos.",
+    "label": {
+      "user": "Usuário",
+      "password": "Senha"
+    }
+  }
+}
