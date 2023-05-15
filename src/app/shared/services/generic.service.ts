@@ -26,7 +26,7 @@ export class GenericService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, PUT, GET, DELETE, OPTIONS, HEAD',
-      'Access-Control-Allow-Headers': 'Origin,Authorization, Content-Type, access-control-allow-origin',
+      'Access-Control-Allow-Headers': 'Origin,Authorization, Content-Type, Access-control-allow-origin',
     });
   }
 
