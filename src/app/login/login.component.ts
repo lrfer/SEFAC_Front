@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,9 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+
+    private authenticationService: AuthenticationService,
+    public dialog: MatDialog,
     private translate: TranslateService) { }
 
   ngOnInit() {
@@ -37,20 +42,20 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   OnSubmit() {
-    // this.showMessageError = false;
+    this.showMessageError = false;
 
-    // this.authenticationService.login(this.loginForm.value).subscribe((data: any) => {
-    //   if (true) {
-    //     this.authenticationService.setToken(data.access_token);
-    //     this.router.navigateByUrl(this.returnUrl);
-    //   } else {
-    //     this.showMessageError = true;
-    //   }
-    // },
-    //   (err: HttpErrorResponse) => {
-    //     this.showMessageError = true;
+    this.authenticationService.login(this.loginForm.value).subscribe((data: any) => {
+      if (true) {
+        this.authenticationService.setToken(data);
+        this.router.navigateByUrl(this.returnUrl);
+      } else {
+        this.showMessageError = true;
+      }
+    },
+      (err: HttpErrorResponse) => {
+        this.showMessageError = true;
 
-    //   });
+      });
   }
 
   closeInvalidUserMessage() {

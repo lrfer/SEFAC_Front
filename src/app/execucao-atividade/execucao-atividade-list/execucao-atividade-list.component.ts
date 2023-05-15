@@ -1,6 +1,4 @@
-import { AlunoService } from 'src/app/shared/services/aluno.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Aluno } from 'src/app/shared/models/aluno.model';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ModalConfirmDialogComponent } from 'src/app/shared/layout/modal/modal-confirm-dialog/modal-confirm-dialog.component';
@@ -11,24 +9,26 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { ExecucaoAtividade } from 'src/app/shared/models/execucao-atividade';
+import { ExecucaoAtividadeService } from 'src/app/shared/services/execucao-ativdade.service';
 
 @Component({
-  selector: 'app-aluno-list',
-  templateUrl: './aluno-list.component.html',
-  styleUrls: ['./aluno-list.component.css']
+  selector: 'app-execucao-atividade-list',
+  templateUrl: './execucao-atividade-list.component.html',
+  styleUrls: ['./execucao-atividade-list.component.css']
 })
-export class AlunoListComponent implements OnInit {
+export class ExecucaoAtividadeListComponent implements OnInit {
 
-  aluno: Aluno[];
+  aluno: ExecucaoAtividade[];
   title: string;
   displayedColumns: string[] = ['nome', 'numeroMatricula', 'id'];
-  dataSource: MatTableDataSource<Aluno>;
+  dataSource: MatTableDataSource<ExecucaoAtividade>;
   message: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private alunoService: AlunoService,
+  constructor(private execucaoAtividadeService: ExecucaoAtividadeService,
     public dialog: MatDialog,
     private translate: TranslateService,
     private messageService: MessageService) { }
@@ -44,9 +44,9 @@ export class AlunoListComponent implements OnInit {
   }
 
   getAll() {
-    this.alunoService.getAll().subscribe((data: any) => {
+    this.execucaoAtividadeService.getAll().subscribe((data: any) => {
 
-      this.dataSource = new MatTableDataSource<Aluno>(data);
+      this.dataSource = new MatTableDataSource<ExecucaoAtividade>(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     },
@@ -56,7 +56,7 @@ export class AlunoListComponent implements OnInit {
       });
   }
 
-  openConfirmDialog(aluno: Aluno): void {
+  openConfirmDialog(aluno: ExecucaoAtividade): void {
 
     const messageConfirm = this.translate.instant('aluno.message.confirm_delete');
 
@@ -73,7 +73,7 @@ export class AlunoListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.alunoService.delete(id).subscribe((response) => {
+    this.execucaoAtividadeService.delete(id).subscribe((response) => {
       const title = this.translate.instant('aluno.title.success');
       const message = this.translate.instant('aluno.message.delete_success');
       this.openDialog(title, message);
@@ -99,4 +99,5 @@ export class AlunoListComponent implements OnInit {
   messageToast(tipo: TipoMessagem, message: string, description: string) {
     this.messageService.add({ severity: tipo, summary: message, detail: description });
   }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,11 @@ export class NavbarComponent implements OnInit {
   logo = '/assets/images/logo.png';
 
   constructor(
-    private translate: TranslateService) { }
+    private translate: TranslateService,
+    private auth: AuthenticationService) { }
 
   logout() {
+    this.auth.logout();
   }
 
   ngOnInit() {

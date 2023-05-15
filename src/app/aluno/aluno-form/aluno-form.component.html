@@ -24,13 +24,13 @@
           <div class = "col">
             <div class="form-group">
               <mat-form-field class="input-full-width">
-              <input required matInput #nome formControlName="numeroMatricula"
+              <input required matInput #numeroMatricula formControlName="numeroMatricula"
               placeholder="{{ 'aluno.label.registration' | translate }}"
               matTooltip = "{{'aluno.label.message.registration' | translate}}" matTooltipPosition="above"
               tabindex="2" [readonly]="disabledField">
-              <mat-error *ngIf="f['nome'].touched && f['nome'].errors" class ="invalid-feedback">
-                <span *ngIf="f['nome'].errors?.['required']">{{ 'aluno.validate.registration.required' | translate }} </span>
-                <span *ngIf="f['nome'].errors?.['maxlength']">{{ 'professor.validate.registration.maxlength' | translate }} </span>
+              <mat-error *ngIf="f['numeroMatricula'].touched && f['numeroMatricula'].errors" class ="invalid-feedback">
+                <span *ngIf="f['numeroMatricula'].errors?.['required']">{{ 'aluno.validate.registration.required' | translate }} </span>
+                <span *ngIf="f['numeroMatricula'].errors?.['maxlength']">{{ 'aluno.validate.registration.maxlength' | translate }} </span>
               </mat-error>
               </mat-form-field>
             </div>
@@ -40,13 +40,13 @@
           <div class="col">
             <div class="form-group">
               <mat-form-field class="input-full-width">
-              <input required matInput #nome formControlName="codigoCurso"
+              <input required matInput #codigoCurso formControlName="codigoCurso"
               placeholder="{{ 'aluno.label.code' | translate }}"
               matTooltip = "{{'aluno.label.message.code' | translate}}" matTooltipPosition="above"
               tabindex="3" [readonly]="disabledField">
-              <mat-error *ngIf="f['nome'].touched && f['nome'].errors" class ="invalid-feedback">
-                <span *ngIf="f['nome'].errors?.['required']">{{ 'aluno.validate.code.required' | translate }} </span>
-                <span *ngIf="f['nome'].errors?.['maxlength']">{{ 'aluno.validate.code.maxlength' | translate }} </span>
+              <mat-error *ngIf="f['codigoCurso'].touched && f['codigoCurso'].errors" class ="invalid-feedback">
+                <span *ngIf="f['codigoCurso'].errors?.['required']">{{ 'aluno.validate.code.required' | translate }} </span>
+                <span *ngIf="f['codigoCurso'].errors?.['maxlength']">{{ 'aluno.validate.code.maxlength' | translate }} </span>
               </mat-error>
               </mat-form-field>
             </div>

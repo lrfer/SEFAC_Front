@@ -25,14 +25,15 @@ export class AuthenticationService extends GenericService {
     super();
   }
 
-  login(login: Login): Observable<Login> {
+  login(login: Login): Observable<string> {
     const data = {
-      'cnome': login.username,
-      'senha': login.password
+      'email': login.username,
+      'senha': login.password,
+      'nome':'123'
     };
 
-    return this.http.post<Login>(this.getUrlApi() + this.getEndpointLogin(),
-      data, { headers: this.getHeaders() });
+    return this.http.post(this.getUrlApi() + this.getEndpointLogin(),
+      data, { responseType:'text', headers: this.getHeaders() });
   }
 
   logout(url?: string) {
@@ -53,7 +54,7 @@ export class AuthenticationService extends GenericService {
   }
 
   decodedToken(token: string) {
-    const decoded = jwt_decode<JwtPayload>('t');
+    const decoded = jwt_decode<JwtPayload>(token);
     if (decoded.exp === undefined) {
       return null;
     }
@@ -119,8 +120,7 @@ export class AuthenticationService extends GenericService {
   }
 
   getDateExpire() {
-    var value = this.getDate(localStorage.getItem(DATE_EXPIRE))
-    return new Date(value);
+    return new Date(localStorage.getItem(DATE_EXPIRE) || "");
   }
   setDateExpire(date: Date) {
     localStorage.setItem(DATE_EXPIRE, date.toString());
@@ -131,11 +131,6 @@ export class AuthenticationService extends GenericService {
   }
   isAvaliador() {
     return localStorage.getItem(IS_AVALIADOR) ? true : false;
-  }
-
-  getDate(str:any): string{
-    var Value = localStorage.getItem(str);
-    return Value == null ? "" : Value.toString();
   }
 
   setRole(role: string) {

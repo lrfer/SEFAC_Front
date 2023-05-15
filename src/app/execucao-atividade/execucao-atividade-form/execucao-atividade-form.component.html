@@ -1,0 +1,91 @@
+<div class="container-fluid">
+  <h4 class="title">{{ title }}</h4>
+  <form id="execucaoAtividadeForm" [formGroup]="execucaoAtividadeForm" (ngSubmit)="submit()">
+  <input type="number" formControlName="id" hidden>
+  <div class="row">
+    <div class ="col">
+      <fieldset>
+        <legend>{{'execucaoAtividade.title.general_information' | translate}}</legend>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+              <input required matInput #nome formControlName="nome"
+              placeholder="{{ 'execucaoAtividade.label.name' | translate }}"
+              matTooltip = "{{'execucaoAtividade.label.message.name' | translate}}" matTooltipPosition="above"
+              tabindex="1" [readonly]="disabledField">
+              <mat-error *ngIf="f['nome'].touched && f['nome'].errors" class ="invalid-feedback">
+                <span *ngIf="f['nome'].errors?.['required']">{{ 'execucaoAtividade.validate.name.required' | translate }} </span>
+                <span *ngIf="f['nome'].errors?.['maxlength']">{{ 'execucaoAtividade.validate.name.maxlength' | translate }} </span>
+              </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+                <mat-date-range-input
+                  [rangePicker]="dataInicioPicker">
+                <input matStartDate placeholder="{{ 'execucaoAtividade.label.message.start_date' | translate }}" formControlName="dataInicio">
+                <input matEndDate placeholder="{{ 'execucaoAtividade.label.message.end_date' | translate }}" formControlName="dataFim">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="dataInicioPicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #dataInicioPicker></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class = "col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+              <input required matInput #cargaHoraria formControlName="cargaHoraria"
+              placeholder="{{ 'execucaoAtividade.label.message.workload' | translate }}"
+              tabindex="2" [readonly]="disabledField">
+              <mat-error *ngIf="f['cargaHoraria'].touched && f['cargaHoraria'].errors" class ="invalid-feedback">
+                <span *ngIf="f['cargaHoraria'].errors?.['required']">{{ 'execucaoAtividade.validate.workload.required' | translate }} </span>
+              </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class = "col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+              <input required matInput #duracao formControlName="duracao"
+              placeholder="{{ 'execucaoAtividade.label.message.duration' | translate }}"
+              tabindex="2" [readonly]="disabledField">
+              <mat-error *ngIf="f['duracao'].touched && f['duracao'].errors" class ="invalid-feedback">
+                <span *ngIf="f['duracao'].errors?.['required']">{{ 'execucaoAtividade.validate.duration.required' | translate }} </span>
+              </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <button type="button" mat-stroked-button color="primary" routerLink="{{ 'routes.execucaoAtividade.list' | translate }}">
+          <i class="material-icons"> reply_all </i> {{ 'button.back' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <button type="submit" mat-stroked-button color="primary" class="float-end"
+          [disabled]="execucaoAtividadeForm.invalid">
+          <i class="material-icons"> save </i> {{ 'button.save' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+
+<p-toast></p-toast>

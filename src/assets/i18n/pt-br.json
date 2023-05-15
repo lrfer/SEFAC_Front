@@ -8,20 +8,71 @@
     "attention": "Atenção:",
     "total": "Total"
   },
+  "button": {
+    "close": "Fechar",
+    "save": "Salvar",
+    "update": "Editar",
+    "back": "Voltar",
+    "action": "Ações",
+    "delete": "Excluir",
+    "view_pdf": "Visualizar PDF",
+    "update_document": "Atualizar Comprovante",
+    "copy_version": "Copiar versão anterior",
+    "copy_version_selected": "Copiar",
+    "no": "Não",
+    "yes": "Sim",
+    "filter": "Filtrar",
+    "evaluate": "Avaliar",
+    "close_report": "Encerrar relatório",
+    "close_evaluation": "Encerrar avaliação"
+  },
   "navbar": {
     "home": "Início",
     "admin": "Administrador",
-    "appraiser": "Execução atividade",
-    "personal": "Pessoal",
-    "report": "Relatório",
-    "activity_type_table": "Tabela de pontuação",
-    "activity_type": "Tipo de Atividade",
-    "activity_type_version": "Versões da tabela de pontuação",
-    "activity": "Atividade",
+    "appraiser": "Atividade",
     "logout": "Sair",
-    "reports": "Relatórios",
-    "aluno": "Gerenciamento de alunos"
+    "aluno": "Gerenciamento de alunos",
+    "reports" : "Execução de atividade"
   },
+  "execucaoAtividade":{
+    "title":{
+      "title": "Lista de execuções de atividade",
+      "new": "Nova execução de atividade",
+      "edit": "Editar execução de atividade",
+      "delete": "Excluir execução de atividade",
+      "error": "Erro",
+      "list": "Execuções de Atividade",
+      "success": "Sucesso",
+      "current_level": "Nível atual",
+      "login": "Login",
+      "general_information": "Informações gerais da execução de atividade"
+    },
+    "label": {
+      "name": "Nome",
+      "stundent_name": "Nome do estudante",
+      "message": {
+        "name": "Nome do projeto",
+        "start_date": "Data início",
+        "end_date": "Data fim",
+        "workload": "Carga horária",
+        "duration" :"Duração",
+        "code": "Código curso"
+        }
+      },
+      "validate": {
+        "name": {
+          "required": "Nome é obrigatório",
+          "maxlength": "Nome deve ter no máximo 255 caracteres"
+        },
+        "workload": {
+          "required": "Carga horária é obrigatória"
+        },
+        "duration": {
+          "required": "Duração do projeto é obrigatório"
+        }
+      }
+  },
+
   "aluno": {
     "title": {
       "title": "Lista de aluno",
@@ -45,6 +96,18 @@
         "code": "Código curso"
       }
     },
+    "message":{
+      "save_success": "Aluno salvo com sucesso.",
+      "edit_success": "Aluno atualizado com sucesso.",
+      "delete_success": "Aluno excluído com sucesso.",
+      "empty_table": "Nenhum aluno  encontrado.",
+      "error_save": "Erro ao salvar aluno.",
+      "error_edit": "Erro ao editar aluno.",
+      "error_delete": "Erro ao excluir aluno.",
+      "error_get": "Erro ao buscar aluno.",
+      "error_copy": "Erro ao copiar aluno.",
+      "confirm_delete": "O aluno será excluído. Tem certeza?"
+    },
     "validate": {
       "name": {
         "required": "Nome é obrigatório",
@@ -61,64 +124,18 @@
     }
   },
 
-  "button": {
-    "close": "Fechar",
-    "save": "Salvar",
-    "update": "Editar",
-    "back": "Voltar",
-    "action": "Ações",
-    "delete": "Excluir",
-    "view_pdf": "Visualizar PDF",
-    "update_document": "Atualizar Comprovante",
-    "copy_version": "Copiar versão anterior",
-    "copy_version_selected": "Copiar",
-    "no": "Não",
-    "yes": "Sim",
-    "filter": "Filtrar",
-    "evaluate": "Avaliar",
-    "close_report": "Encerrar relatório",
-    "close_evaluation": "Encerrar avaliação"
-  },
   "routes": {
     "login": "/login",
     "home": "/home",
-    "report": {
-      "list": "/relatorio",
-      "new": "/relatorio/new",
-      "edit": "/relatorio/edit/{{id}}",
-      "info": "/relatorio/info/{{id}}"
-    },
-    "activity_type_table": {
-      "list": "/tabelaPontuacao",
-      "new": "/tabelaPontuacao/new",
-      "edit": "/tabelaPontuacao/edit/{{id}}"
-    },
-    "activity_type": {
-      "list": "/tipoAtividadeVersao/{{tipoAtividadeVersaoId}}/tipoAtividade",
-      "new": "/tipoAtividadeVersao/{{tipoAtividadeVersaoId}}/tipoAtividade/new",
-      "edit": "/tipoAtividadeVersao/{{tipoAtividadeVersaoId}}/tipoAtividade/edit/{{id}}"
-    },
-    "activity": {
-      "list": "/relatorio/{{relatorioId}}/atividade",
-      "new": "/relatorio/{{relatorioId}}/atividade//new",
-      "edit": "/relatorio/{{relatorioId}}/atividade/edit/{{id}}"
-    },
-    "activity_type_version": {
-      "list": "/tipoAtividadeVersao",
-      "new": "/tipoAtividadeVersao/new",
-      "edit": "/tipoAtividadeVersao/edit/{{id}}"
-    },
-    "evaluation": {
-      "index": "/avaliacao",
-      "activity": {
-        "list": "/avaliacao/{{relatorioId}}/atividade",
-        "edit": "/avaliacao/{{relatorioId}}/atividade/edit/{{id}}"
-      }
-    },
     "aluno": {
       "list": "/aluno",
       "new": "/aluno/new",
       "edit": "/aluno/edit/{{id}}"
+    },
+    "execucaoAtividade":{
+      "list":"/execucao-atividade",
+      "new": "/execucao-atividade/new",
+      "edit": "/execucao-atividade{{id}}"
     }
   },
   "table": {

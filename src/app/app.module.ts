@@ -81,6 +81,13 @@ import { ModalDialogConfirmWarningsComponent } from './shared/layout/modal/modal
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfoWarningsComponent } from './shared/layout/info-warnings/info-warnings.component';
 import { LoaderInterceptor } from './auth/loader.interceptor';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthGuard } from './auth/auth.guard';
+import { LoaderService } from './shared/services/loader.service';
+import { AuthenticationService } from './shared/services/authentication.service';
+import { ExecucaoAtividadeComponent } from './execucao-atividade/execucao-atividade.component';
+import { ExecucaoAtividadeFormComponent } from './execucao-atividade/execucao-atividade-form/execucao-atividade-form.component';
+import { ExecucaoAtividadeListComponent } from './execucao-atividade/execucao-atividade-list/execucao-atividade-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -97,6 +104,7 @@ const modulesMaterialDesign = [
     MatChipsModule,
     MatStepperModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatDialogModule,
     MatExpansionModule,
     MatGridListModule,
@@ -136,7 +144,10 @@ const modulesMaterialDesign = [
     ModalDialogConfirmWarningsComponent,
     ModalDialogComponent,
     ModalConfirmDialogComponent,
-    InfoWarningsComponent
+    InfoWarningsComponent,
+    ExecucaoAtividadeComponent,
+    ExecucaoAtividadeFormComponent,
+    ExecucaoAtividadeListComponent
 
   ],
   imports: [
@@ -173,7 +184,15 @@ const modulesMaterialDesign = [
 
   ],
   providers: [
+    AuthGuard,
+    LoaderService,
+    AuthenticationService,
     MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,

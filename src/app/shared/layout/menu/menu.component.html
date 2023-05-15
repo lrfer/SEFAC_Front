@@ -26,16 +26,6 @@
               <mat-icon class="mr-1"> group </mat-icon> {{ 'navbar.aluno' | translate }}
             </a>
           </mat-nav-list>
-          <mat-nav-list>
-            <a mat-list-item class="ml-2" routerLink="{{ 'routes.activity_type_table.list' | translate }}">
-              <mat-icon class="mr-1"> home </mat-icon> {{ 'navbar.activity_type_table' | translate }}
-            </a>
-          </mat-nav-list>
-          <mat-nav-list>
-            <a mat-list-item class="ml-2" routerLink="{{ 'routes.activity_type_version.list' | translate }}">
-              <mat-icon class="mr-1"> home </mat-icon> {{ 'navbar.activity_type_version' | translate }}
-            </a>
-          </mat-nav-list>
         </mat-nav-list>
       </mat-expansion-panel>
       <mat-expansion-panel class="no-shadow">
@@ -46,22 +36,8 @@
         </mat-expansion-panel-header>
         <mat-nav-list class="ml-0" dense>
           <mat-nav-list>
-            <a mat-list-item class="ml-2" routerLink="{{ 'routes.evaluation.index' | translate }}">
+            <a mat-list-item class="ml-2" routerLink="{{ 'routes.execucaoAtividade.list' | translate }}">
               <mat-icon class="mr-1"> library_books </mat-icon> {{ 'navbar.reports' | translate }}
-            </a>
-          </mat-nav-list>
-        </mat-nav-list>
-      </mat-expansion-panel>
-      <mat-expansion-panel class="no-shadow">
-        <mat-expansion-panel-header fxLayout="row" [expandedHeight]="expandHeight" [collapsedHeight]="collapseHeight">
-          <mat-panel-title>
-            <mat-icon class="mr-1"> person </mat-icon> {{ 'navbar.personal' | translate }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-nav-list class="ml-0" dense>
-          <mat-nav-list>
-            <a mat-list-item class="ml-2" routerLink="{{ 'routes.report.list' | translate }}">
-              <mat-icon class="mr-1"> library_books </mat-icon> {{ 'navbar.report' | translate }}
             </a>
           </mat-nav-list>
         </mat-nav-list>
@@ -74,7 +50,8 @@
       <button mat-icon-button (click)="sidenav.toggle()" fxShow.sm="true" fxShow.gt-sm="false">
         <mat-icon>menu</mat-icon>
       </button>
-      <span fxShow.lt-md="false" fxShow.gt-sm="true"> {{ 'sefac.welcome' | translate}}</span>
+      <span fxShow.lt-md="false" fxShow.gt-sm="true">{{ 'sefac.welcome' | translate: { name: auth.getNameUserLogged() }
+      }}</span>
       <span class="spacer"></span>
       <button mat-button [matMenuTriggerFor]="menu" fxShow.lt-md="false" fxShow.gt-sm="true">
         <mat-icon>account_circle</mat-icon>

@@ -3,6 +3,7 @@ import {  MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-menu',
@@ -23,7 +24,7 @@ export class MenuComponent implements OnInit {
   media$: Observable<MediaChange[]>;
 
   constructor(media: MediaObserver,
-
+    public auth: AuthenticationService,
     private translate: TranslateService) {
     this.media$ = media.asObservable()
   }
@@ -41,6 +42,7 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
+    this.auth.logout();
   }
 
 }

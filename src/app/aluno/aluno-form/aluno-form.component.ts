@@ -75,13 +75,17 @@ export class AlunoFormComponent implements OnInit {
     this.alunoService.save(this.aluno).subscribe((data: Aluno) => {
       this.aluno = data;
 
-      const route = this.translate.instant('routes.aluno.list');
-      this.router.navigate([route]);
+
+      const title = this.translate.instant('aluno.title.new');
+      const message = this.translate.instant('aluno.message.save_success');
+
+      this.openDialog(title, message);
     },
       (error: HttpErrorResponse) => {
         const title = this.translate.instant('aluno.title.error');
+        const message = this.translate.instant('aluno.message.error_save');
 
-        this.messageToast(TipoMessagem.ERROR, title, error.error.message);
+        this.openDialog(title, message, error);
       });
   }
 
@@ -89,13 +93,16 @@ export class AlunoFormComponent implements OnInit {
     this.alunoService.update(this.aluno).subscribe((data: Aluno) => {
       this.aluno = data;
 
-      const route = this.translate.instant('routes.aluno.list');
-      this.router.navigate([route]);
+      const title = this.translate.instant('aluno.title.edit');
+      const message = this.translate.instant('aluno.message.edit_success');
+
+      this.openDialog(title, message);
     },
       (error: HttpErrorResponse) => {
         const title = this.translate.instant('aluno.title.error');
+        const message = this.translate.instant('aluno.message.error_edit');
 
-        this.messageToast(TipoMessagem.ERROR, title, error.error.message);
+        this.openDialog(title, message, error);
       });
   }
 

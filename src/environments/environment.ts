@@ -7,7 +7,7 @@ export const environment = {
    URL_API: 'https://localhost:7051/api',
 
   // Endpoints
-  LOGIN: '/user/authenticate',
+  LOGIN: '/Usuario/autenticar',
   ALUNO : '/Aluno',
-  ATIVIDADE: '/Atividade',
+  EXECUCAO_ATIVIDADE: '/ExecucaoAtividade',
 };

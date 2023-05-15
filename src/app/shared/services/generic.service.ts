@@ -26,7 +26,7 @@ export class GenericService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, PUT, GET, DELETE, OPTIONS, HEAD',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type',
+      'Access-Control-Allow-Headers': 'Origin,Authorization, Content-Type, access-control-allow-origin',
     });
   }
 
@@ -38,8 +38,8 @@ export class GenericService {
     return this._environment.LOGIN;
   }
 
-  getEndpointAtividade(): string {
-    return this._environment.ATIVIDADE;
+  getEndpointExecucaoAtividade(): string {
+    return this._environment.EXECUCAO_ATIVIDADE;
   }
 
   getEndpointAluno(): string {

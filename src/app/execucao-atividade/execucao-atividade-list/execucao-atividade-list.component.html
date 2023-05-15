@@ -1,10 +1,10 @@
 <div class="container-fluid">
-  <h4 class="title">{{ 'aluno.title.title' | translate }}</h4>
+  <h4 class="title">{{ 'execucaoAtividade.title.title' | translate }}</h4>
   <div class="header">
     <div class="row">
       <div class="col">
-        <button type="button" mat-flat-button color="primary" routerLink="{{ 'routes.aluno.new' | translate }}">
-          <i class="material-icons"> playlist_add </i> {{ 'aluno.title.new' | translate }}
+        <button type="button" mat-flat-button color="primary" routerLink="{{ 'routes.execucaoAtividade.new' | translate }}">
+          <i class="material-icons"> playlist_add </i> {{ 'execucaoAtividade.title.new' | translate }}
         </button>
       </div>
       <div class="col filter">
@@ -18,13 +18,13 @@
   <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="nome">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'aluno.label.name' | translate }}
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.name' | translate }}
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.nome }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="numeroMatricula">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'aluno.label.registration' | translate }}
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.registration' | translate }}
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.numeroMatricula }} </mat-cell>
       </ng-container>
@@ -33,7 +33,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'button.action' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <a mat-icon-button color="primary" focusable="false"
-            routerLink="{{ 'routes.aluno.edit' | translate: { id: element.id } }}">
+            routerLink="{{ 'routes.execucaoAtividade.edit' | translate: { id: element.id } }}">
             <i class="material-icons"> edit </i>
           </a>
           <button mat-icon-button color="primary" focusable="false" (click)="openConfirmDialog(element)">
