@@ -10,6 +10,8 @@ import { ModalDialogComponent } from 'src/app/shared/layout/modal/modal-dialog/m
 import { MessageService } from 'primeng/api';
 import { ExecucaoAtividade } from 'src/app/shared/models/execucao-atividade';
 import { ExecucaoAtividadeService } from 'src/app/shared/services/execucao-ativdade.service';
+import { Aluno } from 'src/app/shared/models/aluno.model';
+import { AlunoService } from 'src/app/shared/services/aluno.service';
 
 
 const today = new Date();
@@ -26,6 +28,7 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
 
 
   execucaoAtividadeForm: FormGroup;
+  alunos: Aluno[];
   execucaoAtividade: ExecucaoAtividade;
   execucaoAtividadeId: number;
   title: string;
@@ -39,7 +42,8 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
     private translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private alunoService: AlunoService
     ) {
     this.execucaoAtividadeForm = this.execucaoAtividadeFormGroup();
   }
@@ -52,8 +56,8 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
     return this.formBuilder.group({
       id: new FormControl(0),
       nome: new FormControl('',[Validators.maxLength(255),Validators.required]),
-      cargaHoraria: new FormControl(0,[Validators.required]),
-      duracao: new FormControl(0,[Validators.required]),
+      cargaHoraria: new FormControl('',[Validators.required]),
+      duracao: new FormControl('',[Validators.required]),
       dataInicio: new FormControl(new Date(year,month), [Validators.required]),
       dataFim: new FormControl(new Date(year,month), [Validators.required]),
 
@@ -148,6 +152,8 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
   }
 
   init() {
+    this.getAllAlunos();
+
     this.route.params.subscribe(params => {
       this.execucaoAtividadeId = params['id'];
       if (this.execucaoAtividadeId) {
@@ -165,6 +171,15 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
         this.disabledField = false;
       }
     });
+  }
+
+  getAllAlunos(){
+    this.alunoService.getAll().subscribe((result: any) => {
+      this.alunos = result;
+    },
+    (err: HttpErrorResponse) => {
+      console.log(err.error);
+     });
   }
 
   messageToast(tipo: TipoMessagem, message: string, description: string) {

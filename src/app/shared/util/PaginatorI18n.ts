@@ -8,7 +8,7 @@ export class PaginatorI18n {
 
     getPaginatorIntl(): MatPaginatorIntl {
         const paginatorIntl = new MatPaginatorIntl();
-        paginatorIntl.itemsPerPageLabel = this.translate.instant('table.ITEMS_PER_PAGE_LABEL');
+        paginatorIntl.itemsPerPageLabel = "Itens por página:"
         paginatorIntl.nextPageLabel = this.translate.instant('table.NEXT_PAGE_LABEL');
         paginatorIntl.previousPageLabel = this.translate.instant('table.PREVIOUS_PAGE_LABEL');
         paginatorIntl.firstPageLabel = this.translate.instant('table.FIRST_PAGE_LABEL');

@@ -23,11 +23,30 @@
         <mat-cell *matCellDef="let element"> {{ element.nome }} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="numeroMatricula">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.registration' | translate }}
+      <ng-container matColumnDef="aluno">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.stundent_name' | translate }}
         </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.numeroMatricula }} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nomeAluno }} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="data">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.data' | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.dataInicio_Fim }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cargaHoraria">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.workload' | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.cargaHoraria }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="duracao">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.duration' | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.duracao }} </mat-cell>
+      </ng-container>
+
 
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'button.action' | translate }} </mat-header-cell>

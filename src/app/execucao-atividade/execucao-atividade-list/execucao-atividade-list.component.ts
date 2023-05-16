@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ExecucaoAtividade } from 'src/app/shared/models/execucao-atividade';
 import { ExecucaoAtividadeService } from 'src/app/shared/services/execucao-ativdade.service';
 
+
 @Component({
   selector: 'app-execucao-atividade-list',
   templateUrl: './execucao-atividade-list.component.html',
@@ -19,9 +20,9 @@ import { ExecucaoAtividadeService } from 'src/app/shared/services/execucao-ativd
 })
 export class ExecucaoAtividadeListComponent implements OnInit {
 
-  aluno: ExecucaoAtividade[];
+  execucaoAtividade: ExecucaoAtividade[];
   title: string;
-  displayedColumns: string[] = ['nome', 'numeroMatricula', 'id'];
+  displayedColumns: string[] = ['nome', 'aluno','data','cargaHoraria','duracao', 'id'];
   dataSource: MatTableDataSource<ExecucaoAtividade>;
   message: string;
 
@@ -45,20 +46,23 @@ export class ExecucaoAtividadeListComponent implements OnInit {
 
   getAll() {
     this.execucaoAtividadeService.getAll().subscribe((data: any) => {
-
-      this.dataSource = new MatTableDataSource<ExecucaoAtividade>(data);
+      this.execucaoAtividade = data;
+      this.execucaoAtividade.forEach(x=>x.dataInicio_Fim = this.castDate(x.dataInicio,x.dataFim));
+      this.dataSource = new MatTableDataSource<ExecucaoAtividade>(this.execucaoAtividade);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     },
       (error: HttpErrorResponse) => {
-        const title = this.translate.instant('aluno.title.error');
+        const title = this.translate.instant('execucaoAtividade.title.error');
         this.messageToast(TipoMessagem.ERROR, title, error.error.message);
       });
+
+
   }
 
-  openConfirmDialog(aluno: ExecucaoAtividade): void {
+  openConfirmDialog(execucaoAtividade: ExecucaoAtividade): void {
 
-    const messageConfirm = this.translate.instant('aluno.message.confirm_delete');
+    const messageConfirm = this.translate.instant('execucaoAtividade.message.confirm_delete');
 
     const dialogRef = this.dialog.open(ModalConfirmDialogComponent, {
       position: { top: '6%' },
@@ -67,20 +71,20 @@ export class ExecucaoAtividadeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.delete(aluno.id);
+        this.delete(execucaoAtividade.id);
       }
     });
   }
 
   delete(id: number) {
     this.execucaoAtividadeService.delete(id).subscribe((response) => {
-      const title = this.translate.instant('aluno.title.success');
-      const message = this.translate.instant('aluno.message.delete_success');
+      const title = this.translate.instant('execucaoAtividade.title.success');
+      const message = this.translate.instant('execucaoAtividade.message.delete_success');
       this.openDialog(title, message);
       this.getAll();
     },
       (error: HttpErrorResponse) => {
-        const title = this.translate.instant('aluno.title.error');
+        const title = this.translate.instant('execucaoAtividade.title.error');
         this.messageToast(TipoMessagem.ERROR, title, error.error.message);
       });
   }
@@ -100,4 +104,15 @@ export class ExecucaoAtividadeListComponent implements OnInit {
     this.messageService.add({ severity: tipo, summary: message, detail: description });
   }
 
+  castDate(dataInicio,dataFim){
+    return this.getDDMMYYYY(dataInicio) + " - " + this.getDDMMYYYY(dataFim);
+  }
+
+  getDDMMYYYY(date) {
+    var today = new Date(date);
+    var dd = today.getDate();
+    var mm = today.getMonth();
+    var yyyy = today.getFullYear();
+    return dd + '/' + mm + '/' + yyyy;
+}
 }

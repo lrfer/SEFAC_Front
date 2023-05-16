@@ -51,7 +51,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatRippleModule } from '@angular/material/core';
+import { DateAdapter, MatRippleModule } from '@angular/material/core';
 // Material Popups & Modals
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -88,6 +88,9 @@ import { AuthenticationService } from './shared/services/authentication.service'
 import { ExecucaoAtividadeComponent } from './execucao-atividade/execucao-atividade.component';
 import { ExecucaoAtividadeFormComponent } from './execucao-atividade/execucao-atividade-form/execucao-atividade-form.component';
 import { ExecucaoAtividadeListComponent } from './execucao-atividade/execucao-atividade-list/execucao-atividade-list.component';
+import { PortalModule } from '@angular/cdk/portal';
+import { DialogModule } from '@angular/cdk/dialog';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -170,12 +173,11 @@ const modulesMaterialDesign = [
     modulesMaterialDesign,
 
     HttpClientModule,
-
+    DialogModule,
     ToastModule,
-
+    PortalModule,
     FlexLayoutModule,
-
-
+    MatSelectModule,
   ],
   exports: [
     modulesMaterialDesign,
@@ -202,7 +204,6 @@ const modulesMaterialDesign = [
       provide: MatPaginatorIntl, deps: [TranslateService],
       useFactory: (translateService: TranslateService) => new PaginatorI18n(translateService).getPaginatorIntl()
     },
-
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'

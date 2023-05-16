@@ -23,25 +23,41 @@
           </div>
           <div class="col">
             <div class="form-group">
-              <mat-form-field class="input-full-width">
+              <mat-form-field class="input-full-width" >
                 <mat-date-range-input
+                tabindex="2"
                   [rangePicker]="dataInicioPicker">
-                <input matStartDate placeholder="{{ 'execucaoAtividade.label.message.start_date' | translate }}" formControlName="dataInicio">
-                <input matEndDate placeholder="{{ 'execucaoAtividade.label.message.end_date' | translate }}" formControlName="dataFim">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="dataInicioPicker"></mat-datepicker-toggle>
+                <input  [readonly]="disabledField" matStartDate placeholder="{{ 'execucaoAtividade.label.message.start_date' | translate }}" formControlName="dataInicio">
+                <input [readonly]="disabledField" matEndDate placeholder="{{ 'execucaoAtividade.label.message.end_date' | translate }}" formControlName="dataFim">
+              </mat-date-range-input >
+              <mat-datepicker-toggle  matSuffix [for]="dataInicioPicker"></mat-datepicker-toggle>
               <mat-date-range-picker #dataInicioPicker></mat-date-range-picker>
               </mat-form-field>
             </div>
           </div>
         </div>
         <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+                <mat-select #idAluno
+                  formControlName="idAluno"
+                  placeholder="{{ 'execucaoAtividade.label.message.student' | translate }}"
+                  matTooltipPosition="above"
+                  tabindex="3">
+                    <mat-option *ngFor="let aluno of alunos" [value]="aluno.id">
+                      {{ aluno.nome }}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
           <div class = "col">
             <div class="form-group">
               <mat-form-field class="input-full-width">
               <input required matInput #cargaHoraria formControlName="cargaHoraria"
               placeholder="{{ 'execucaoAtividade.label.message.workload' | translate }}"
-              tabindex="2" [readonly]="disabledField">
+              tabindex="4" [readonly]="disabledField"  >
               <mat-error *ngIf="f['cargaHoraria'].touched && f['cargaHoraria'].errors" class ="invalid-feedback">
                 <span *ngIf="f['cargaHoraria'].errors?.['required']">{{ 'execucaoAtividade.validate.workload.required' | translate }} </span>
               </mat-error>
@@ -54,7 +70,7 @@
               <mat-form-field class="input-full-width">
               <input required matInput #duracao formControlName="duracao"
               placeholder="{{ 'execucaoAtividade.label.message.duration' | translate }}"
-              tabindex="2" [readonly]="disabledField">
+              tabindex="5" [readonly]="disabledField">
               <mat-error *ngIf="f['duracao'].touched && f['duracao'].errors" class ="invalid-feedback">
                 <span *ngIf="f['duracao'].errors?.['required']">{{ 'execucaoAtividade.validate.duration.required' | translate }} </span>
               </mat-error>

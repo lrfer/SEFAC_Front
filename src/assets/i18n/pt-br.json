@@ -50,13 +50,18 @@
     "label": {
       "name": "Nome",
       "stundent_name": "Nome do estudante",
+      "data" : "Data",
+      "workload": "Carga horária",
+      "duration" :"Duração",
       "message": {
         "name": "Nome do projeto",
         "start_date": "Data início",
         "end_date": "Data fim",
         "workload": "Carga horária",
         "duration" :"Duração",
-        "code": "Código curso"
+        "code": "Código curso",
+        "student":"Aluno",
+        "date" : "Data"
         }
       },
       "validate": {
@@ -135,7 +140,7 @@
     "execucaoAtividade":{
       "list":"/execucao-atividade",
       "new": "/execucao-atividade/new",
-      "edit": "/execucao-atividade{{id}}"
+      "edit": "/execucao-atividade/edit/{{id}}"
     }
   },
   "table": {
