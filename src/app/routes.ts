@@ -12,33 +12,33 @@ import { ExecucaoAtividadeComponent } from './execucao-atividade/execucao-ativid
 import { ExecucaoAtividadeFormComponent } from './execucao-atividade/execucao-atividade-form/execucao-atividade-form.component';
 import { ExecucaoAtividadeListComponent } from './execucao-atividade/execucao-atividade-list/execucao-atividade-list.component';
 
-
-
 export const appRoutes: Routes = [
-    {
-        path: '',component:MenuComponent, canActivate: [AuthGuard],
+  {
+    path: '',
+    component: MenuComponent,
+    children: [
+      { path: '', component: MenuComponent },
+      { path: 'home', component: HomeComponent },
+      {
+        path: 'aluno',
+        component: AlunoComponent,
         children: [
-            {path:'',component: MenuComponent},
-            { path: 'home', component: HomeComponent },
-            {
-                path: 'aluno', component: AlunoComponent,
-                children: [
-                    { path: '', component: AlunoListComponent },
-                    { path: 'new', component: AlunoFormComponent },
-                    { path: 'edit/:id', component: AlunoFormComponent }
-                ]
-            },
-            {
-
-              path: 'execucao-atividade', component: ExecucaoAtividadeComponent,
-              children: [
-                { path: '', component: ExecucaoAtividadeListComponent },
-                { path: 'new', component: ExecucaoAtividadeFormComponent },
-                { path: 'edit/:id', component: ExecucaoAtividadeFormComponent }
-              ]
-            },
-            { path: 'pageNotFound', component: PageNotFoundComponent }
-        ]
-    },
-    { path: 'login', component: LoginComponent }
+          { path: '', component: AlunoListComponent },
+          { path: 'new', component: AlunoFormComponent },
+          { path: 'edit/:id', component: AlunoFormComponent },
+        ],
+      },
+      {
+        path: 'execucao-atividade',
+        component: ExecucaoAtividadeComponent,
+        children: [
+          { path: '', component: ExecucaoAtividadeListComponent },
+          { path: 'new', component: ExecucaoAtividadeFormComponent },
+          { path: 'edit/:id', component: ExecucaoAtividadeFormComponent },
+        ],
+      },
+      { path: 'pageNotFound', component: PageNotFoundComponent },
+    ],
+  },
+  { path: 'login', component: LoginComponent },
 ];
