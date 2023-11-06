@@ -4,10 +4,9 @@ import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GenericService {
-
   _environment: any;
 
   constructor() {
@@ -26,7 +25,8 @@ export class GenericService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, PUT, GET, DELETE, OPTIONS, HEAD',
-      'Access-Control-Allow-Headers': 'Origin,Authorization, Content-Type, Access-control-allow-origin',
+      'Access-Control-Allow-Headers':
+        'Origin,Authorization, Content-Type, Access-control-allow-origin',
     });
   }
 
@@ -46,4 +46,7 @@ export class GenericService {
     return this._environment.ALUNO;
   }
 
+  getEndpointAtividade(): string {
+    return this._environment.ATIVIDADE;
+  }
 }

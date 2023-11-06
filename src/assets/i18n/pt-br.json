@@ -32,7 +32,8 @@
     "appraiser": "Atividade",
     "logout": "Sair",
     "aluno": "Gerenciamento de alunos",
-    "reports" : "Execução de atividade"
+    "reports" : "Execução de atividade",
+    "activity" : "Atividades"
   },
   "execucaoAtividade":{
     "title":{
@@ -53,6 +54,7 @@
       "data" : "Data",
       "workload": "Carga horária",
       "duration" :"Duração",
+      "activity" : "Atividade",
       "message": {
         "name": "Nome do projeto",
         "start_date": "Data início",
@@ -61,7 +63,8 @@
         "duration" :"Duração",
         "code": "Código curso",
         "student":"Aluno",
-        "date" : "Data"
+        "date" : "Data",
+        "activity" : "Atividade"
         }
       },
       "validate": {
@@ -128,6 +131,53 @@
       }
     }
   },
+  "atividade": {
+    "title": {
+      "title": "Lista de atividades",
+      "new": "Nova atividade",
+      "edit": "Editar atividade",
+      "delete": "Excluir atividade",
+      "error": "Erro",
+      "list": "atividades",
+      "success": "Sucesso",
+      "current_level": "Nível atual",
+      "login": "Login",
+      "general_information": "Informações gerais da atividade"
+    },
+    "label": {
+      "name": "Nome",
+      "codigoSiex": "Código Siex",
+      "descricao": "Descricao",
+      "message": {
+        "name": "Nome da atividade",
+        "registration": "Número matrícula",
+        "code": "Código Siex",
+        "descricao": "Descricao da atividade"
+      }
+    },
+    "message":{
+      "save_success": "Atividade salvo com sucesso.",
+      "edit_success": "Atividade atualizado com sucesso.",
+      "delete_success": "Atividade excluído com sucesso.",
+      "empty_table": "Nenhum atividade  encontrado.",
+      "error_save": "Erro ao salvar atividade.",
+      "error_edit": "Erro ao editar atividade.",
+      "error_delete": "Erro ao excluir atividade.",
+      "error_get": "Erro ao buscar Atividade.",
+      "error_copy": "Erro ao copiar atividade.",
+      "confirm_delete": "A atividade será excluído. Tem certeza?"
+    },
+    "validate": {
+      "name": {
+        "required": "Nome é obrigatório",
+        "maxlength": "Nome deve ter no máximo 255 caracteres"
+      },
+      "code": {
+        "required": "Código siex é obrigatório",
+        "maxlength": "Código deve ter no máximo 255 caracteres"
+      }
+    }
+  },
 
   "routes": {
     "login": "/login",
@@ -141,6 +191,11 @@
       "list":"/execucao-atividade",
       "new": "/execucao-atividade/new",
       "edit": "/execucao-atividade/edit/{{id}}"
+    },
+    "atividade":{
+      "list":"/atividade/new",
+      "new": "/atividade/new",
+      "edit": "/atividade/edit/{{id}}"
     }
   },
   "table": {

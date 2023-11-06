@@ -11,6 +11,10 @@ import { PageNotFoundComponent } from './shared/layout/page-not-found/page-not-f
 import { ExecucaoAtividadeComponent } from './execucao-atividade/execucao-atividade.component';
 import { ExecucaoAtividadeFormComponent } from './execucao-atividade/execucao-atividade-form/execucao-atividade-form.component';
 import { ExecucaoAtividadeListComponent } from './execucao-atividade/execucao-atividade-list/execucao-atividade-list.component';
+import { AtividadeComponent } from './atividade/atividade.component';
+import { Atividade } from './shared/models/atividade.model';
+import { AtividadeFormComponent } from './atividade/atividade-form/atividade-form.component';
+import { AtividadeListComponent } from './atividade/atividade-list/atividade-list.component';
 
 export const appRoutes: Routes = [
   {
@@ -35,6 +39,16 @@ export const appRoutes: Routes = [
           { path: '', component: ExecucaoAtividadeListComponent },
           { path: 'new', component: ExecucaoAtividadeFormComponent },
           { path: 'edit/:id', component: ExecucaoAtividadeFormComponent },
+        ],
+      },
+
+      {
+        path: 'atividade',
+        component: AtividadeComponent,
+        children: [
+          { path: '', component: AtividadeListComponent },
+          { path: 'new', component: AtividadeFormComponent },
+          { path: 'edit/:id', component: AtividadeFormComponent },
         ],
       },
       { path: 'pageNotFound', component: PageNotFoundComponent },

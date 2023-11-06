@@ -77,7 +77,24 @@
               </mat-form-field>
             </div>
           </div>
+        </div>
 
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+                <mat-select #idAtividade
+                  formControlName="idAtividade"
+                  placeholder="{{ 'execucaoAtividade.label.message.activity' | translate }}"
+                  matTooltipPosition="above"
+                  tabindex="6">
+                    <mat-option *ngFor="let atividade of atividades" [value]="atividade.id">
+                      {{ atividade.codigoSiex }}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
         </div>
       </fieldset>
 
@@ -101,6 +118,8 @@
       </div>
     </div>
   </div>
+
+
 </form>
 </div>
 

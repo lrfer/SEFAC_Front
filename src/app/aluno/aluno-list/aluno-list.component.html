@@ -36,6 +36,9 @@
             routerLink="{{ 'routes.aluno.edit' | translate: { id: element.id } }}">
             <i class="material-icons"> edit </i>
           </a>
+          <a mat-icon-button color="primary" focusable="false" (click)="downloadDocument(element.id)">
+            <i class="material-icons"> download </i>
+          </a>
           <button mat-icon-button color="primary" focusable="false" (click)="openConfirmDialog(element)">
             <i class="material-icons"> delete_forever </i>
           </button>

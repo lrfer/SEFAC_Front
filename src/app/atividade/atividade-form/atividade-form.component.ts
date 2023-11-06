@@ -12,101 +12,86 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TipoMessagem } from 'src/app/shared/enum/tipo-messagem.enum';
 import { ModalDialogComponent } from 'src/app/shared/layout/modal/modal-dialog/modal-dialog.component';
 import { MessageService } from 'primeng/api';
-import { ExecucaoAtividade } from 'src/app/shared/models/execucao-atividade';
 import { Aluno } from 'src/app/shared/models/aluno.model';
-import { AlunoService } from 'src/app/shared/services/aluno.service';
-import { ExecucaoAtividadeService } from 'src/app/shared/services/execucao-ativdade.service';
 import { Atividade } from 'src/app/shared/models/atividade.model';
 import { AtividadeService } from 'src/app/shared/services/ativdade.service';
 
-const today = new Date();
-const month = today.getMonth();
-const year = today.getFullYear();
-
 @Component({
-  selector: 'app-execucao-atividade-form',
-  templateUrl: './execucao-atividade-form.component.html',
-  styleUrls: ['./execucao-atividade-form.component.css'],
+  selector: 'app-atividade-form',
+  templateUrl: './atividade-form.component.html',
+  styleUrls: ['./atividade-form.component.css'],
 })
-export class ExecucaoAtividadeFormComponent implements OnInit {
-  execucaoAtividadeForm: FormGroup;
+export class AtividadeFormComponent implements OnInit {
+  atividadeForm: FormGroup;
   alunos: Aluno[];
-  execucaoAtividade: ExecucaoAtividade;
-  execucaoAtividadeId: number;
+  atividade: Atividade;
+  atividadeId: number;
   title: string;
-  atividades: Atividade[];
-
+  disabledButtonDocument = true;
+  showInputDocument = true;
   showMenuFiltro: boolean;
   disabledField: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
-    private execucaoAtividadeService: ExecucaoAtividadeService,
+    private atividadeService: AtividadeService,
     public dialog: MatDialog,
     private translate: TranslateService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService,
-    private alunoService: AlunoService,
-    private atividadeService: AtividadeService
+    private messageService: MessageService
   ) {
-    this.execucaoAtividadeForm = this.execucaoAtividadeFormGroup();
+    this.atividadeForm = this.atividadeFormGroup();
+    this.atividade = new Atividade();
   }
 
   ngOnInit() {
     this.init();
   }
 
-  execucaoAtividadeFormGroup() {
+  atividadeFormGroup() {
     return this.formBuilder.group({
       id: new FormControl(0),
-      nome: new FormControl('', [
-        Validators.maxLength(255),
-        Validators.required,
-      ]),
-      cargaHoraria: new FormControl('', [Validators.required]),
-      duracao: new FormControl('', [Validators.required]),
-      dataInicio: new FormControl(new Date(year, month), [Validators.required]),
-      dataFim: new FormControl(new Date(year, month), [Validators.required]),
-
-      idAluno: new FormControl('', [Validators.required]),
-      idAtividade: new FormControl('', [Validators.required]),
+      codigoSiex: new FormControl('', Validators.required),
+      descricao: new FormControl(''),
+      documento: new FormControl(),
+      documento_base64: new FormControl(),
+      documento_id: new FormControl(),
     });
   }
 
-  execucaoAtividadeFormGroupEdit() {
-    this.execucaoAtividadeForm.patchValue({
-      id: this.execucaoAtividade.id,
-      nome: this.execucaoAtividade.nome,
-      cargaHoraria: this.execucaoAtividade.cargaHoraria,
-      duracao: this.execucaoAtividade.duracao,
-      dataInicio: this.execucaoAtividade.dataInicio,
-      dataFim: this.execucaoAtividade.dataFim,
-
-      idAluno: this.execucaoAtividade.idAluno,
-      idAtividade: this.execucaoAtividade.idAtividade,
+  atividadeFormGroupEdit() {
+    this.atividadeForm.patchValue({
+      id: this.atividade.id,
+      codigoSiex: this.atividade.codigoSiex,
+      descricao: this.atividade.descricao,
+      documento_id: this.atividade.documento_id
+        ? this.atividade.documento_id
+        : 0,
+      documento_base64: this.atividade.documento
+        ? this.atividade.documento.arquivo
+        : '',
     });
   }
 
   get f() {
-    return this.execucaoAtividadeForm.controls;
+    return this.atividadeForm.controls;
   }
 
   submit() {
-    this.execucaoAtividade = new ExecucaoAtividade(
-      this.execucaoAtividadeForm.value
-    );
-    if (this.execucaoAtividade.id && this.execucaoAtividade.id !== 0) {
-      this.updateAluno();
+    this.atividade = new Atividade(this.atividadeForm.value);
+    if (this.atividade.id && this.atividade.id !== 0) {
+      this.updateAtividade();
     } else {
-      this.saveAluno();
+      console.log(this.atividade);
+      this.saveAtividade();
     }
   }
 
-  saveAluno() {
-    this.execucaoAtividadeService.save(this.execucaoAtividade).subscribe(
-      (data: ExecucaoAtividade) => {
-        this.execucaoAtividade = data;
+  saveAtividade() {
+    this.atividadeService.save(this.atividade).subscribe(
+      (data: Atividade) => {
+        this.atividade = data;
 
         const route = this.translate.instant('routes.execucaoAtividade.list');
         this.router.navigate([route]);
@@ -119,10 +104,10 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
     );
   }
 
-  updateAluno() {
-    this.execucaoAtividadeService.update(this.execucaoAtividade).subscribe(
-      (data: ExecucaoAtividade) => {
-        this.execucaoAtividade = data;
+  updateAtividade() {
+    this.atividadeService.update(this.atividade).subscribe(
+      (data: Atividade) => {
+        this.atividade = data;
 
         const route = this.translate.instant('routes.execucaoAtividade.list');
         this.router.navigate([route]);
@@ -136,11 +121,11 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
   }
 
   getById() {
-    this.execucaoAtividadeService.getById(this.execucaoAtividadeId).subscribe(
-      (result: ExecucaoAtividade) => {
+    this.atividadeService.getById(this.atividadeId).subscribe(
+      (result: Atividade) => {
         if (result) {
-          this.execucaoAtividade = result;
-          this.execucaoAtividadeFormGroupEdit();
+          this.atividade = result;
+          this.atividadeFormGroupEdit();
         } else {
           const route = this.translate.instant('routes.execucaoAtividade.list');
           this.router.navigate([route]);
@@ -171,21 +156,18 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
   }
 
   init() {
-    this.getAllAlunos();
-    this.getAllAtividades();
-
     this.route.params.subscribe((params) => {
-      this.execucaoAtividadeId = params['id'];
-      if (this.execucaoAtividadeId) {
+      this.atividadeId = params['id'];
+      if (this.atividadeId) {
         this.showMenuFiltro = false;
         this.disabledField = true;
         this.getById();
-        this.translate.get(['execucaoAtividade']).subscribe((response: any) => {
-          this.title = response.execucaoAtividade.title.edit;
+        this.translate.get(['atividade']).subscribe((response: any) => {
+          this.title = response.atividade.title.edit;
         });
       } else {
-        this.translate.get(['execucaoAtividade']).subscribe((response: any) => {
-          this.title = response.execucaoAtividade.title.new;
+        this.translate.get(['atividade']).subscribe((response: any) => {
+          this.title = response.atividade.title.new;
         });
         this.showMenuFiltro = true;
         this.disabledField = false;
@@ -193,23 +175,10 @@ export class ExecucaoAtividadeFormComponent implements OnInit {
     });
   }
 
-  getAllAlunos() {
-    this.alunoService.getAll().subscribe(
-      (result: any) => {
-        this.alunos = result;
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err.error);
-      }
-    );
-  }
-
   getAllAtividades() {
     this.atividadeService.getAll().subscribe(
       (result: any) => {
-        console.log(result);
-
-        this.atividades = result;
+        this.alunos = result;
       },
       (err: HttpErrorResponse) => {
         console.log(err.error);

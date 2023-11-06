@@ -29,6 +29,12 @@
         <mat-cell *matCellDef="let element"> {{ element.nomeAluno }} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="atividade">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.activity' | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nomeAtividade }} </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="data">
         <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'execucaoAtividade.label.data' | translate }}
         </mat-header-cell>

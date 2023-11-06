@@ -15,10 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-aluno-list',
   templateUrl: './aluno-list.component.html',
-  styleUrls: ['./aluno-list.component.css']
+  styleUrls: ['./aluno-list.component.css'],
 })
 export class AlunoListComponent implements OnInit {
-
   aluno: Aluno[];
   title: string;
   displayedColumns: string[] = ['nome', 'numeroMatricula', 'id'];
@@ -28,10 +27,12 @@ export class AlunoListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private alunoService: AlunoService,
+  constructor(
+    private alunoService: AlunoService,
     public dialog: MatDialog,
     private translate: TranslateService,
-    private messageService: MessageService) { }
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.getAll();
@@ -44,51 +45,56 @@ export class AlunoListComponent implements OnInit {
   }
 
   getAll() {
-    this.alunoService.getAll().subscribe((data: any) => {
-
-      this.dataSource = new MatTableDataSource<Aluno>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    },
+    this.alunoService.getAll().subscribe(
+      (data: any) => {
+        this.dataSource = new MatTableDataSource<Aluno>(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
       (error: HttpErrorResponse) => {
         const title = this.translate.instant('aluno.title.error');
         this.messageToast(TipoMessagem.ERROR, title, error.error.message);
-      });
+      }
+    );
   }
 
   openConfirmDialog(aluno: Aluno): void {
-
-    const messageConfirm = this.translate.instant('aluno.message.confirm_delete');
+    const messageConfirm = this.translate.instant(
+      'aluno.message.confirm_delete'
+    );
 
     const dialogRef = this.dialog.open(ModalConfirmDialogComponent, {
       position: { top: '6%' },
-      data: { title: messageConfirm }
+      data: { title: messageConfirm },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        console.log(aluno);
         this.delete(aluno.id);
       }
     });
   }
 
   delete(id: number) {
-    this.alunoService.delete(id).subscribe((response) => {
-      const title = this.translate.instant('aluno.title.success');
-      const message = this.translate.instant('aluno.message.delete_success');
-      this.openDialog(title, message);
-      this.getAll();
-    },
+    this.alunoService.delete(id).subscribe(
+      (response) => {
+        const title = this.translate.instant('aluno.title.success');
+        const message = this.translate.instant('aluno.message.delete_success');
+        this.openDialog(title, message);
+        this.getAll();
+      },
       (error: HttpErrorResponse) => {
         const title = this.translate.instant('aluno.title.error');
         this.messageToast(TipoMessagem.ERROR, title, error.error.message);
-      });
+      }
+    );
   }
 
   openDialog(title: string, message: string, error?: HttpErrorResponse): void {
     this.dialog.open(ModalDialogComponent, {
       position: { top: '6%' },
-      data: { title: title, message: message }
+      data: { title: title, message: message },
     });
 
     if (error) {
@@ -96,7 +102,27 @@ export class AlunoListComponent implements OnInit {
     }
   }
 
+  downloadDocument(id: number) {
+    this.alunoService.generateReport(id).subscribe((response) => {
+      this.downloadPdfFromBase64(response, 'aluno' + id);
+    });
+  }
+
+  downloadPdfFromBase64(base64Data: string, filename: string) {
+    const src = `data:application/pdf;base64,${base64Data}`;
+    const link = document.createElement('a');
+    link.href = src;
+    link.download = filename;
+    link.click();
+
+    link.remove();
+  }
+
   messageToast(tipo: TipoMessagem, message: string, description: string) {
-    this.messageService.add({ severity: tipo, summary: message, detail: description });
+    this.messageService.add({
+      severity: tipo,
+      summary: message,
+      detail: description,
+    });
   }
 }

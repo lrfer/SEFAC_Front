@@ -1,0 +1,8 @@
+<div class="input-group" [formGroup]="form">
+
+  <div *ngIf="showInputUpload && !avaliador">
+    <input type="file" (change)="onSelectFile($event)" formControlName="documento" accept="application/pdf"
+      placeholder="{{ 'file_upload.label.document' | translate }}"
+      matTooltip="{{ 'file_upload.label.message.document' | translate }}" matTooltipPosition="above">
+  </div>
+</div>

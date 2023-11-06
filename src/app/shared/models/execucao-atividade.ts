@@ -1,4 +1,4 @@
-import { DatePipe } from "@angular/common";
+import { DatePipe } from '@angular/common';
 
 export class ExecucaoAtividade {
   id: number;
@@ -8,12 +8,13 @@ export class ExecucaoAtividade {
   dataInicio: Date;
   dataFim: Date;
   idAluno: number;
+  idAtividade: number;
+  nomeAtividade: string;
 
-  dataInicio_Fim:string;
-  nomeAluno:string;
+  dataInicio_Fim: string;
+  nomeAluno: string;
 
-  constructor(execucao?:ExecucaoAtividade){
-
+  constructor(execucao?: ExecucaoAtividade) {
     this.id = execucao?.id ? execucao.id : 0;
     this.cargaHoraria = execucao?.cargaHoraria ? execucao.cargaHoraria : 0;
     this.duracao = execucao?.duracao ? execucao.duracao : 0;
@@ -22,5 +23,6 @@ export class ExecucaoAtividade {
     this.dataInicio = execucao?.dataInicio ? execucao.dataInicio : new Date();
     this.dataFim = execucao?.dataFim ? execucao.dataFim : new Date();
     this.idAluno = execucao?.idAluno ? execucao.idAluno : 0;
+    this.idAtividade = execucao?.idAtividade ? execucao.idAtividade : 0;
   }
 }

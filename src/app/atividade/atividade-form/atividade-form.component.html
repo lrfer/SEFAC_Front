@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <h4 class="title">{{ title }}</h4>
+  <form id="atividadeForm" [formGroup]="atividadeForm" (ngSubmit)="submit()">
+  <input type="number" formControlName="id" hidden>
+  <div class="row">
+    <div class ="col">
+      <fieldset>
+        <legend>{{'atividade.title.general_information' | translate}}</legend>
+        <div class="row">
+          <div class = "col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+              <input required matInput #codigoSiex formControlName="codigoSiex"
+              placeholder="{{ 'atividade.label.message.code' | translate }}"
+              tabindex="2" [readonly]="disabledField"  >
+              <mat-error *ngIf="f['codigoSiex'].touched && f['codigoSiex'].errors" class ="invalid-feedback">
+                <span *ngIf="f['codigoSiex'].errors?.['codigoSiex']">{{ 'atividade.validate.code.required' | translate }} </span>
+              </mat-error>
+              </mat-form-field>
+            </div>
+          <div class = "col">
+            <div class="form-group">
+              <mat-form-field class="input-full-width">
+              <input  matInput #descricao formControlName="descricao"
+              placeholder="{{ 'atividade.label.message.descricao' | translate }}"
+              tabindex="3" [readonly]="disabledField"  >
+              </mat-form-field>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="disabledButtonDocument" class="col">
+            <div class="form-group">
+              <app-file-upload [url]="atividade.documento?.arquivo" [form]="atividadeForm"
+                [showInputUpload]="showInputDocument"  tabindex="4" ></app-file-upload>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <button type="button" mat-stroked-button color="primary" routerLink="{{ 'routes.atividade.list' | translate }}">
+          <i class="material-icons"> reply_all </i> {{ 'button.back' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <button type="submit" mat-stroked-button color="primary" class="float-end"
+          [disabled]="atividadeForm.invalid">
+          <i class="material-icons"> save </i> {{ 'button.save' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+
+<p-toast></p-toast>

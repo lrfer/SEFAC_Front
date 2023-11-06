@@ -10,4 +10,5 @@ export const environment = {
   LOGIN: '/Usuario/autenticar',
   ALUNO: '/Aluno',
   EXECUCAO_ATIVIDADE: '/ExecucaoAtividade',
+  ATIVIDADE: '/Atividade',
 };

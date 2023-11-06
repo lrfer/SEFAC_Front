@@ -10,33 +10,26 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ExecucaoAtividade } from 'src/app/shared/models/execucao-atividade';
-import { ExecucaoAtividadeService } from 'src/app/shared/services/execucao-ativdade.service';
+import { Atividade } from 'src/app/shared/models/atividade.model';
+import { AtividadeService } from 'src/app/shared/services/ativdade.service';
 
 @Component({
-  selector: 'app-execucao-atividade-list',
-  templateUrl: './execucao-atividade-list.component.html',
-  styleUrls: ['./execucao-atividade-list.component.css'],
+  selector: 'app-atividade-list',
+  templateUrl: './atividade-list.component.html',
+  styleUrls: ['./atividade-list.component.css'],
 })
-export class ExecucaoAtividadeListComponent implements OnInit {
-  execucaoAtividade: ExecucaoAtividade[];
+export class AtividadeListComponent implements OnInit {
+  atividade: Atividade[];
   title: string;
-  displayedColumns: string[] = [
-    'nome',
-    'aluno',
-    'atividade',
-    'data',
-    'cargaHoraria',
-    'duracao',
-    'id',
-  ];
-  dataSource: MatTableDataSource<ExecucaoAtividade>;
+  displayedColumns: string[] = ['CodigoSiex', 'Descricao', 'Aluno'];
+  dataSource: MatTableDataSource<Atividade>;
   message: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private execucaoAtividadeService: ExecucaoAtividadeService,
+    private atividadeService: AtividadeService,
     public dialog: MatDialog,
     private translate: TranslateService,
     private messageService: MessageService
@@ -53,15 +46,9 @@ export class ExecucaoAtividadeListComponent implements OnInit {
   }
 
   getAll() {
-    this.execucaoAtividadeService.getAll().subscribe(
+    this.atividadeService.getAll().subscribe(
       (data: any) => {
-        this.execucaoAtividade = data;
-        this.execucaoAtividade.forEach(
-          (x) => (x.dataInicio_Fim = this.castDate(x.dataInicio, x.dataFim))
-        );
-        this.dataSource = new MatTableDataSource<ExecucaoAtividade>(
-          this.execucaoAtividade
-        );
+        this.dataSource = new MatTableDataSource<Atividade>(this.atividade);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
@@ -90,7 +77,7 @@ export class ExecucaoAtividadeListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.execucaoAtividadeService.delete(id).subscribe(
+    this.atividadeService.delete(id).subscribe(
       (response) => {
         const title = this.translate.instant('execucaoAtividade.title.success');
         const message = this.translate.instant(
@@ -123,17 +110,5 @@ export class ExecucaoAtividadeListComponent implements OnInit {
       summary: message,
       detail: description,
     });
-  }
-
-  castDate(dataInicio, dataFim) {
-    return this.getDDMMYYYY(dataInicio) + ' - ' + this.getDDMMYYYY(dataFim);
-  }
-
-  getDDMMYYYY(date) {
-    var today = new Date(date);
-    var dd = today.getDate();
-    var mm = today.getMonth();
-    var yyyy = today.getFullYear();
-    return dd + '/' + mm + '/' + yyyy;
   }
 }

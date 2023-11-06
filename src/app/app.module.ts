@@ -3,8 +3,7 @@ import { AlunoListComponent } from './aluno/aluno-list/aluno-list.component';
 import { AlunoComponent } from './aluno/aluno.component';
 import { AlunoFormComponent } from './aluno/aluno-form/aluno-form.component';
 import { MessageService } from 'primeng/api';
-import {ToastModule} from 'primeng/toast';
-
+import { ToastModule } from 'primeng/toast';
 
 import { MenuComponent } from './shared/layout/menu/menu.component';
 import { NavbarComponent } from './shared/layout/navbar/navbar.component';
@@ -58,18 +57,24 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 // Material Data tables
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { PaginatorI18n } from './shared/util/PaginatorI18n';
 
-
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
@@ -90,7 +95,10 @@ import { ExecucaoAtividadeFormComponent } from './execucao-atividade/execucao-at
 import { ExecucaoAtividadeListComponent } from './execucao-atividade/execucao-atividade-list/execucao-atividade-list.component';
 import { PortalModule } from '@angular/cdk/portal';
 import { DialogModule } from '@angular/cdk/dialog';
-
+import { AtividadeComponent } from './atividade/atividade.component';
+import { AtividadeListComponent } from './atividade/atividade-list/atividade-list.component';
+import { AtividadeFormComponent } from './atividade/atividade-form/atividade-form.component';
+import { FileUploadComponent } from './shared/file-upload/file-upload.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -100,37 +108,37 @@ registerLocaleData(localePt);
 
 const modulesMaterialDesign = [
   MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatStepperModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
 ];
 
 @NgModule({
@@ -150,8 +158,11 @@ const modulesMaterialDesign = [
     InfoWarningsComponent,
     ExecucaoAtividadeComponent,
     ExecucaoAtividadeFormComponent,
-    ExecucaoAtividadeListComponent
-
+    ExecucaoAtividadeListComponent,
+    AtividadeComponent,
+    AtividadeListComponent,
+    AtividadeFormComponent,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -160,17 +171,17 @@ const modulesMaterialDesign = [
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule.forRoot(appRoutes,{preloadingStrategy : PreloadAllModules}),
+    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),
 
-    AppRoutingModule,
     modulesMaterialDesign,
+    AppRoutingModule,
 
     HttpClientModule,
     DialogModule,
@@ -179,12 +190,7 @@ const modulesMaterialDesign = [
     FlexLayoutModule,
     MatSelectModule,
   ],
-  exports: [
-    modulesMaterialDesign,
-    RouterModule,
-    TranslateModule
-
-  ],
+  exports: [modulesMaterialDesign, RouterModule, TranslateModule],
   providers: [
     AuthGuard,
     LoaderService,
@@ -193,21 +199,23 @@ const modulesMaterialDesign = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
-      multi: true
+      multi: true,
     },
     {
-      provide: MatPaginatorIntl, deps: [TranslateService],
-      useFactory: (translateService: TranslateService) => new PaginatorI18n(translateService).getPaginatorIntl()
+      provide: MatPaginatorIntl,
+      deps: [TranslateService],
+      useFactory: (translateService: TranslateService) =>
+        new PaginatorI18n(translateService).getPaginatorIntl(),
     },
     {
       provide: LOCALE_ID,
-      useValue: 'pt-BR'
-    }
+      useValue: 'pt-BR',
+    },
   ],
   entryComponents: [
     ModalDialogComponent,
@@ -215,6 +223,6 @@ const modulesMaterialDesign = [
     ModalFormComponent,
     ModalDialogConfirmWarningsComponent,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
