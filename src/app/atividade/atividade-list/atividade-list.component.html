@@ -1,1 +1,53 @@
-<p>atividade-list works!</p>
+<div class="container-fluid">
+  <h4 class="title">{{ 'atividade.title.title' | translate }}</h4>
+  <div class="header">
+    <div class="row">
+      <div class="col">
+        <button type="button" mat-flat-button color="primary" routerLink="{{ 'routes.atividade.new' | translate }}">
+          <i class="material-icons"> playlist_add </i> {{ 'atividade.title.new' | translate }}
+        </button>
+      </div>
+      <div class="col filter">
+        <mat-form-field>
+          <input #filtro    matInput (keyup)="applyFilter(filtro.value)" placeholder="{{ 'sefac.filter' | translate }}">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="codigoSiex">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'atividade.label.codigoSiex' | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.codigoSiex }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="descricao">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'atividade.label.descricao' | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.descricao}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'button.action' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <a mat-icon-button color="primary" focusable="false"
+            routerLink="{{ 'routes.atividade.edit' | translate: { id: element.id } }}">
+            <i class="material-icons"> edit </i>
+          </a>
+          <button mat-icon-button color="primary" focusable="false" (click)="openConfirmDialog(element)">
+            <i class="material-icons"> delete_forever </i>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+<p-toast></p-toast>

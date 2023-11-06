@@ -70,7 +70,6 @@ export class AlunoListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(aluno);
         this.delete(aluno.id);
       }
     });

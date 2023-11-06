@@ -21,7 +21,7 @@ import { AtividadeService } from 'src/app/shared/services/ativdade.service';
 export class AtividadeListComponent implements OnInit {
   atividade: Atividade[];
   title: string;
-  displayedColumns: string[] = ['CodigoSiex', 'Descricao', 'Aluno'];
+  displayedColumns: string[] = ['codigoSiex', 'descricao', 'id'];
   dataSource: MatTableDataSource<Atividade>;
   message: string;
 
@@ -48,12 +48,13 @@ export class AtividadeListComponent implements OnInit {
   getAll() {
     this.atividadeService.getAll().subscribe(
       (data: any) => {
-        this.dataSource = new MatTableDataSource<Atividade>(this.atividade);
+        console.log(data);
+        this.dataSource = new MatTableDataSource<Atividade>(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
       (error: HttpErrorResponse) => {
-        const title = this.translate.instant('execucaoAtividade.title.error');
+        const title = this.translate.instant('atividade.title.error');
         this.messageToast(TipoMessagem.ERROR, title, error.error.message);
       }
     );

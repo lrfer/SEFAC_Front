@@ -193,7 +193,7 @@
       "edit": "/execucao-atividade/edit/{{id}}"
     },
     "atividade":{
-      "list":"/atividade/new",
+      "list":"/atividade",
       "new": "/atividade/new",
       "edit": "/atividade/edit/{{id}}"
     }
